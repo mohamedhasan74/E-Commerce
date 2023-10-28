@@ -1,0 +1,48 @@
+<h4 class="py-4">Register Now</h4>
+<form [formGroup]="registerForm" (ngSubmit)="registerHandle(registerForm)">
+    <div *ngIf="apiError" class="alert alert-danger">{{apiError}}</div>
+    <label for="name">Name</label>
+    <input formControlName="name" type="text" name="name" id="name" placeholder="Mohamed Hasan"
+        class="form-control mb-3">
+    <div *ngIf="name?.errors && name?.touched" class="alert alert-danger">
+        <p *ngIf="name?.errors?.['required']" class="m-0 p-0">*Name Is Required</p>
+        <p *ngIf="name?.errors?.['minlength']" class="m-0 p-0">*Name Is At Least 3 Chars</p>
+        <p *ngIf="name?.errors?.['maxlength']" class="m-0 p-0">*Name Is 12 Chars Maximum</p>
+    </div>
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" name="email" id="email" placeholder="mohamedhasan@gmail.com"
+        class="form-control mb-2">
+    <div *ngIf="email?.errors && email?.touched" class="alert alert-danger">
+        <p *ngIf="email?.errors?.['required']" class="m-0 p-0">*Email Is Required</p>
+        <p *ngIf="email?.errors?.['email']" class="m-0 p-0">*Email Is InValid</p>
+    </div>
+    <label for="password">Password</label>
+    <input formControlName="password" type="password" name="password" id="password" placeholder="*********"
+        class="form-control mb-3">
+    <div *ngIf="password?.errors && password?.touched" class="alert alert-danger">
+        <p *ngIf="password?.errors?.['required']" class="m-0 p-0">*password Is Required</p>
+        <p *ngIf="password?.errors?.['pattern']" class="m-0 p-0">*password Must Start With Capital Char, And must Be
+            Between (6,12) Chars</p>
+    </div>
+    <label for="rePassword">Repassword</label>
+    <input formControlName="rePassword" type="password" name="rePassword" id="rePassword" placeholder="*********"
+        class="form-control mb-3">
+    <div *ngIf="rePassword?.errors && rePassword?.touched" class="alert alert-danger">
+        <p *ngIf="rePassword?.errors?.['required']" class="m-0 p-0">*rePassword Is Required</p>
+        <p *ngIf="rePassword?.errors?.['pattern']" class="m-0 p-0">*rePassword Must Start With Capital Char, And
+            must Be
+            Between (6,12) Chars</p>
+        <p *ngIf="rePassword?.errors?.['notMatched']" class="m-0 p-0">*Password Is Not Matched</p>
+    </div>
+    <label for="phone">Phone</label>
+    <input formControlName="phone" type="tel" name="phone" id="phone" placeholder="01004647312"
+        class="form-control mb-3">
+    <div *ngIf="phone?.errors && phone?.touched" class="alert alert-danger">
+        <p *ngIf="phone?.errors?.['required']" class="m-0 p-0">*Phone Is Required</p>
+        <p *ngIf="phone?.errors?.['pattern']" class="m-0 p-0">*Phone Must Be Egyption Number</p>
+    </div>
+    <button [disabled]="registerForm.invalid" class="btn btn-success">
+        <span *ngIf="!isLoading">Register</span>
+        <i *ngIf="isLoading" class="fas fa-spinner fa-pulse"></i>
+    </button>
+</form>

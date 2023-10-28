@@ -1,0 +1,35 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<div *ngIf="allProducts" class="py-4 d-flex align-items-center justify-content-between flex-sm-row flex-column">
+    <h4>numOfCartItems : <span class="text-main">{{numOfCartItems}}</span></h4>
+    <h4>totalCartPrice : <span class="text-main">{{totalCartPrice}}</span></h4>
+</div>
+<div *ngIf="!allProducts" class="d-flex justify-content-center align-items-center h-50 py-3">
+    <img src="assets/images/notFound2.jpg" class="img-fluid">
+</div>
+<div>
+    <div *ngFor="let product of allProducts" class="row align-items-center border-bottom p-2">
+        <div class="col-md-3 col-sm-12">
+            <img [src]="product.product.imageCover" class="w-100">
+        </div>
+        <div class="col-md-9 col-sm-12 d-flex align-items-center justify-content-between flex-md-row flex-column">
+            <div>
+                <h6 class="fw-bold">{{product.product.title}}</h6>
+                <p class="text-main">{{product.product.category.name}}</p>
+                <div class="d-flex gap-3">
+                    <p>{{product.price}} EGP</p>
+                    <p>
+                        <i class="fas fa-star rating-color"></i>
+                        {{product.product.ratingsAverage}}
+                    </p>
+                </div>
+                <a (click)="removerSpecificItem(product.product.id)" class="text-danger cursor-pointer">Remove</a>
+            </div>
+            <div class="d-flex align-items-center justify-content-between gap-3">
+                <a (click)="updateItemQuantity(product.product.id, product.count - 1)" class=" btn btn-danger">-</a>
+                <p class="m-0 p-0">{{product.count}}</p>
+                <a (click)="updateItemQuantity(product.product.id, product.count + 1)" class=" btn btn-success">+</a>
+            </div>
+        </div>
+    </div>
+    <button *ngIf="allProducts" (click)="clearUserCart()" class="btn btn-danger my-2">Clear</button>
+</div>

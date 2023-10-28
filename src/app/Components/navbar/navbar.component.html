@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/home"><img src="assets/images/freshcart-logo.svg"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLinkActive="text-main" routerLink="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="text-main" routerLink="/products">Products</a>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link mt-lg-0 mt-2" routerLinkActive="text-main" routerLink="/cart">
+                        <button type="button" class="position-relative btn btn-sm border-0">
+                            <i class="fa-solid fa-cart-shopping font-sm"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-main">
+                                {{numberOfProducts}}
+                            </span>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <li class="nav-item d-flex align-items-center gap-3">
+                    <i class="fab fa-instagram cursor-pointer"></i>
+                    <i class="fab fa-facebook cursor-pointer"></i>
+                    <i class="fab fa-tiktok cursor-pointer"></i>
+                    <i class="fab fa-twitter cursor-pointer"></i>
+                    <i class="fab fa-linkedin cursor-pointer"></i>
+                    <i class="fab fa-youtube cursor-pointer"></i>
+                </li>
+
+                <li class="nav-item w-fitContent" *ngIf="isLogged">
+                    <a class="nav-link border rounded-2 mx-lg-2 p-2">
+                        <i class="fa-regular fa-user text-main"></i>
+                        {{userName}}
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link cursor-pointer" (click)="logOut()">LogOut</a>
+                </li>
+                <li class="nav-item" *ngIf="!isLogged">
+                    <a class="nav-link" routerLinkActive="text-main" routerLink="/login">Login</a>
+                </li>
+                <li class="nav-item" *ngIf="!isLogged">
+                    <a class="nav-link" routerLinkActive="text-main" routerLink="/register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

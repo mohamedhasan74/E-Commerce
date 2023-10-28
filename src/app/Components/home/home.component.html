@@ -1,0 +1,54 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<header class="py-3 d-md-block d-none">
+    <div class="row">
+        <div class="col-9 p-0">
+            <owl-carousel-o [options]="customOptions">
+                <ng-template carouselSlide>
+                    <img height="400" src="assets/images/slider-image-1.jpeg" class="w-100">
+                </ng-template>
+                <ng-template carouselSlide>
+                    <img height="400" src="assets/images/slider-image-2.jpeg" class="w-100">
+                </ng-template>
+                <ng-template carouselSlide>
+                    <img height="400" src="assets/images/slider-image-3.jpeg" class="w-100">
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+        <div class="col-3 p-0">
+            <img height="200" src="assets/images/sliderImg1.PNG" class="w-100">
+            <img height="200" src="assets/images/sliderImg2.PNG" class="w-100">
+        </div>
+    </div>
+</header>
+<app-categoriesslider></app-categoriesslider>
+
+<h3>Products</h3>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass p-1"></i></span>
+    </div>
+    <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Search" aria-label="Username"
+        aria-describedby="basic-addon1">
+</div>
+<div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-6" *ngFor="let product of products|search:searchTerm">
+        <div class="my-2 position-relative cardProduct overflow-hidden cursor-pointer">
+            <img [src]="product?.imageCover" class="w-100">
+            <h3 class="h6 text-main">{{product?.category.name}}</h3>
+            <small class="fw-bold">{{product?.title.split(" ").slice(0,2).join(" ")}}</small>
+            <div class="d-flex align-items-center justify-content-between pt-2">
+                <p>{{product?.price}} EGP</p>
+                <p>
+                    <i class="fas fa-star rating-color"></i>
+                    {{product?.ratingsAverage}}
+                </p>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-3 position-absolute p-2 rounded-2 cardButtons">
+                <a (click)="addToCart(product?.id)" class="cursor-pointer"><i class="fa-solid fa-cart-plus"></i></a>
+                <a class="cursor-pointer"><i class="fa-regular fa-heart text-danger"></i></a>
+                <a (click)="getProductDetails(product?.id)" class="cursor-pointer"><i
+                        class="fa-solid fa-circle-info text-info"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

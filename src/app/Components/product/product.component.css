@@ -1,0 +1,9 @@
+.cardProduct:hover .cardButtons {
+    right: 0;
+}
+.cardButtons {
+    top: 0;
+    right: -35px;
+    background-color: #f0f3f2;
+    transition: 0.5s;
+}
